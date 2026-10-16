@@ -55,13 +55,19 @@ The dataset covers the following nine professional directions, each containing a
 
 ## Installation
 
-Run in the `hydrosebench-eval` directory:
+Install or upgrade the PyPI package (Python 3.10 or later):
+
+```bash
+python -m pip install --upgrade hydrosebench
+```
+
+Alternatively, install from a downloaded repository in the `hydrosebench-eval` directory:
 
 ```bash
 pip install -e .
 ```
 
-To upgrade an existing installation from this directory, run `python -m pip install --upgrade .`. Language selection is available in version `0.1.1`. Downloading exports the data bundled with the installed package; it does not automatically fetch newer data from GitHub or a package index.
+To upgrade an existing installation from this directory, run `python -m pip install --upgrade .`. Version `0.1.2` includes both complete language editions and the updated scoring rules below. Downloading exports the data bundled with the installed package; it does not automatically fetch newer data from GitHub or a package index.
 
 ## Quick Start
 
@@ -190,7 +196,7 @@ python -m hydrosebench batch-evaluate \
   --output-dir ./results
 ```
 
-These commands use the complete built-in benchmark. The repository's `examples/test.csv` is a code demonstration with five deliberately missing standard answers and five missing answers in each of the two model columns. It also preserves seven explicit Qwen-Plus conclusions meaning "no correct option" or "no correct answer"; these disagree with valid standard answers and are scored `Incorrect`. Run the scripts in [examples](../examples/README.md) to use that test file as both the benchmark and predictions. Demonstration scores are not official benchmark results.
+These commands use the complete built-in benchmark. The repository's `examples/test.csv` is a code demonstration with five deliberately missing standard answers and five missing answers in each of the two model columns. It also preserves seven explicit Qwen-Plus conclusions meaning "no correct option" or "no correct answer"; these disagree with valid standard answers and are scored `Incorrect`. Download the repository and run the scripts in [examples](https://github.com/cwthu26/Hydro-SE-Bench/blob/main/examples/README.md) to use that test file as both the benchmark and predictions. The example scripts and test file are provided in the repository, separately from the installed package. Demonstration scores are not official benchmark results.
 
 ### Using Custom Benchmarks
 
@@ -322,7 +328,7 @@ For detailed API documentation, see the code documentation.
 
 ## Full bilingual dataset and validation
 
-Use `load_builtin_benchmark("hydrosebench")` for Chinese or `load_builtin_benchmark("hydrosebench_en")` for English. Each edition contains 4,000 source records in bundled JSON and CSV. See the [dataset README](../README.md) for file links.
+Use `load_builtin_benchmark("hydrosebench")` for Chinese or `load_builtin_benchmark("hydrosebench_en")` for English. Each edition contains 4,000 source records in bundled JSON and CSV. See the [dataset README](https://github.com/cwthu26/Hydro-SE-Bench/blob/main/README.md) for file links.
 
 ### Scoring and issue reporting
 

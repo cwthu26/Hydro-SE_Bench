@@ -68,7 +68,13 @@ benchmark = load_builtin_benchmark("hydrosebench_en")
 hydrosebench evaluate --benchmark hydrosebench_en --predictions predictions.json
 ```
 
-The Python package includes both complete editions. Select `zh` (Chinese, default) or `en` (English) when downloading:
+The Python package includes both complete editions. Install it with Python 3.10 or later:
+
+```bash
+python -m pip install --upgrade hydrosebench
+```
+
+Select `zh` (Chinese, default) or `en` (English) when downloading:
 
 ```bash
 python -m hydrosebench download --language zh --output ./data

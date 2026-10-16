@@ -5,14 +5,17 @@
 ### Step 1: Install Package
 
 ```bash
-cd hydrosebench-eval
-pip install -e .
+python -m pip install --upgrade hydrosebench
 ```
+
+Python 3.10 or later is required. To install from a downloaded repository instead, run `python -m pip install ./hydrosebench-eval` from its root directory.
 
 ### Step 2: Run First Example
 
+Download the repository for its example scripts and `test.csv`, then run from the repository root:
+
 ```bash
-cd ../examples
+cd examples
 python example_1_basic_evaluation.py
 ```
 

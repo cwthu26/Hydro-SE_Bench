@@ -4,7 +4,13 @@
 
 ### 1. Install Python Package
 
-Navigate to the `hydrosebench-eval` directory and install:
+Install or upgrade from PyPI with Python 3.10 or later:
+
+```bash
+python -m pip install --upgrade hydrosebench
+```
+
+Alternatively, download the repository, navigate to the `hydrosebench-eval` directory and install:
 
 ```bash
 cd hydrosebench-eval
@@ -23,7 +29,7 @@ To upgrade an existing installation from the current repository, run this from t
 python -m pip install --upgrade ./hydrosebench-eval
 ```
 
-The language selection shown below is available in version `0.1.1`. Updating a repository does not automatically update an installed package or a package-index release.
+Version `0.1.2` includes both complete language editions and the updated scoring rules. Updating a repository does not automatically update an installed package or a package-index release.
 
 ### 2. Verify Installation
 
@@ -104,6 +110,8 @@ python example_0_download_data.py
 ```
 
 ## Running Examples
+
+The example scripts and `test.csv` are provided in the repository, separately from the installed package. Download the repository before running the commands below.
 
 ### Method 1: Run Example Files Directly
 

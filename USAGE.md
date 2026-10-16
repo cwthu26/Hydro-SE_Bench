@@ -9,7 +9,15 @@
 
 ## Installation
 
-### Method 1: Using requirements.txt (Recommended)
+### Method 1: Install from PyPI (Recommended)
+
+Requires Python 3.10 or later:
+
+```bash
+python -m pip install --upgrade hydrosebench
+```
+
+### Method 2: Install from the Downloaded Repository
 
 ```bash
 cd Hydro-SE-Bench
@@ -18,7 +26,7 @@ cd hydrosebench-eval
 pip install -e .
 ```
 
-### Method 2: Manual Installation
+### Method 3: Manual Installation from the Repository
 
 ```bash
 pip install "pandas>=2.0" "openpyxl>=3.0"

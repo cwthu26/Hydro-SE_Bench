@@ -22,7 +22,7 @@ def build_parser() -> argparse.ArgumentParser:
     eval_parser.add_argument(
         "--benchmark",
         choices=sorted(BUILTIN_BENCHMARKS),
-        help="Use a bundled benchmark (hydrosebench).",
+        help="Use a bundled Chinese or English benchmark.",
     )
     eval_parser.add_argument(
         "--benchmark-path",

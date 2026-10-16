@@ -1,7 +1,6 @@
 """
 Example 5: Complete Workflow
-Demonstrates a complete enterprise-level workflow from data validation, sampling, evaluation to deep analysis
-Includes: data quality checks, sampling to create subsets, batch evaluation, detailed analysis, error analysis, report generation, etc.
+Demonstrates data validation, optional sampling, batch evaluation, analysis, and report generation.
 """
 
 from utils import setup_package_path, get_output_dir, get_test_data_path
@@ -41,7 +40,7 @@ def main():
     
     if not excel_path.exists():
         print(f"⚠ Example file does not exist: {excel_path}")
-        print("Please ensure test.xlsx file exists, or modify excel_path to point to your data file")
+        print("Please ensure test.csv or test.xlsx exists, or modify excel_path to point to your data file")
         return
     
     print(f"Input file: {excel_path}")
@@ -131,7 +130,7 @@ def main():
             benchmark,
             per_category=5,
             seed=42,
-            output_path=output_dir / "sampled_benchmark.json",
+            output_path=output_dir / f"sampled_benchmark{excel_path.suffix}",
         )
         benchmark = sampled_benchmark
         print(f"✓ Sampled subset created, {len(benchmark.examples)} questions total")

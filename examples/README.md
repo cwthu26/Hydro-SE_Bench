@@ -4,13 +4,32 @@ This directory contains complete examples of using the HydroSEBench evaluation l
 
 The bundled `test.csv` contains 4,000 questions with recorded predictions from **DeepSeek-V3.2-Exp** and **Qwen-Plus**. Its columns are `ID,Level,Type,Question,Answer,DeepSeek-V3.2-Exp,Qwen-Plus`. Running the examples scores these recorded predictions without calling model APIs.
 
-**Code demonstration only:** This test file includes exceptional cases such as missing standard answers and model responses that cannot be scored. Five randomly selected `Answer` cells have intentionally been cleared: `HWR-47`, `HRD-483`, `ESM-297`, `ESM-109`, and `HRD-220`. Qwen-Plus also has seven recorded responses such as `无正确选项` (no correct option) or `无正确答案` (no correct answer). These are model responses, not verified defects in the benchmark. Consequently, `test.csv` is not identical to the official benchmark described in the main README, and its results are provided only to demonstrate the code, not as official benchmark results. The official dataset files are unchanged.
+**Code demonstration only:** This test file deliberately includes missing standard answers and missing model answers. It differs from the complete official dataset and must not be used to report official benchmark results. The official Chinese and English dataset files retain all standard answers.
+
+The following cells are intentionally empty:
+
+| Column | Number of empty cells | Question IDs |
+|---|---:|---|
+| `Answer` | 5 | `HWR-47`, `HRD-483`, `ESM-297`, `ESM-109`, `HRD-220` |
+| `DeepSeek-V3.2-Exp` | 5 | `HWR-51`, `HRD-493`, `ESM-304`, `ESM-115`, `HRD-229` |
+| `Qwen-Plus` | 5 | `HRD-303`, `HSE-187`, `ESM-252`, `GE-221`, `HSE-325` |
+
+The model-answer cells were randomly selected with seed `20261016`. The selected questions do not overlap with the missing-standard questions, each other, or the explicit conclusions described below. Each model therefore has 10 `Unscored` questions: five missing standard answers and five missing model answers.
+
+Qwen-Plus has seven recorded conclusions meaning "no correct option" or "no correct answer": `BK-153`, `BK-191`, `IS-46`, `GE-95`, `ESM-419`, `PS-223`, and `PS-479`. These are explicit model conclusions. They disagree with the valid standard option answers and are scored `Incorrect`. They remain visible in the normal reports and do not appear in the unscored-issue list.
 
 Examples 1, 2, 3, and 5 load both the questions/standard answers and model predictions from `test.csv`, retaining all rows so these exceptional cases appear in the reports. Examples 0 and 4 continue to use the complete official benchmark for data export and sampling.
 
-**中文说明：** `test.csv` 专门考虑了标准答案缺失、模型无法给出可评分答案等异常情况，其中随机清空了 5 道题的参考答案，并保留模型“无正确选项／无正确答案”等原始回答。因此，该测试文件与正文介绍的正式数据不完全一致，仅作为代码测试示例提供，不应用于报告正式评测成绩。正式题库文件未作修改。
-
 Questions with missing standard answers, missing model answers, or unusable answers remain in the reports as `Unscored`, with separate reasons. Excel reports include an `Issues` sheet; batch evaluation also writes `score_report_issues.csv` for each model. See [scoring and issue reporting](../hydrosebench-eval/README.md#scoring-and-issue-reporting) for the scoring rules.
+
+Expected results when scoring all 4,000 demonstration rows:
+
+| Model | Correct | Incorrect | Scored | Unscored | Accuracy |
+|---|---:|---:|---:|---:|---:|
+| DeepSeek-V3.2-Exp | 3,174 | 816 | 3,990 | 10 | 79.55% |
+| Qwen-Plus | 2,973 | 1,017 | 3,990 | 10 | 74.51% |
+
+Accuracy is correct answers divided by scored questions. The unscored questions are excluded from this denominator and from the incorrect count.
 
 ## Directory Structure
 
@@ -45,7 +64,7 @@ Demonstrates how to download the complete Chinese and English datasets using the
 - Select Chinese (`zh`, default) or English (`en`)
 - Download data files in JSON and CSV formats (package uses CSV format for version control)
 - Download to current directory or specified path
-- Download data files using command-line tools
+- Display command-line download examples that you can run separately
 - Verify downloaded files
 
 **How to Run:**
@@ -112,7 +131,7 @@ Demonstrates how to use the HydroSEBench library to evaluate a single model.
 - Load the example benchmark from `test.csv`, including intentionally missing standard answers
 - Load model predictions from CSV or Excel file
 - Calculate scores and generate reports
-- Export reports in JSON and Excel formats
+- Export reports in JSON, CSV, and Excel formats
 
 **How to Run:**
 ```bash
@@ -126,6 +145,7 @@ python example_1_basic_evaluation.py
 **Output:**
 Files are saved to `examples/output/example_1_basic_evaluation/`:
 - `basic_evaluation_report.json`
+- `basic_evaluation_report.csv`
 - `basic_evaluation_report.xlsx`
 
 ### Example 2: Batch Evaluate Multiple Models (`example_2_batch_evaluation.py`)
@@ -155,6 +175,7 @@ Files are saved to `examples/output/example_2_batch_evaluation/`:
   - `score_report.csv`
   - `score_report.json`
   - `score_report.xlsx`
+  - `score_report_issues.csv`
 
 ### Example 3: Using Custom Benchmark (`example_3_custom_benchmark.py`)
 
@@ -224,6 +245,7 @@ Files are saved to `examples/output/example_5_complete_workflow/`:
 - `detailed_analysis_report.md`
 - `detailed_analysis_report.json`
 - `detailed_analysis_report.docx` (if supported)
+- `detailed_analysis_report.pdf` (if the PDF dependencies are installed)
 - `<model_name>/` directories containing detailed reports
 
 ## Utility Functions (`utils.py`)
@@ -242,7 +264,7 @@ These functions ensure consistent path handling across all examples.
 Running these examples requires the following dependencies:
 
 ```bash
-pip install pandas openpyxl
+pip install "pandas>=2.0" "openpyxl>=3.0"
 ```
 
 The package should be installed first:
@@ -251,7 +273,7 @@ cd hydrosebench-eval
 pip install -e .
 ```
 
-If you only need basic functionality (without Excel reports), you can skip `openpyxl`.
+`pandas` and `openpyxl` are required package dependencies. Example 5 can additionally generate Word reports with `python-docx`, and PDF reports with `markdown`, `weasyprint`, and the required system libraries. If an optional report dependency is unavailable, that format is skipped and the other reports are still generated.
 
 ## Data File Requirements
 
@@ -264,7 +286,7 @@ Most examples require the following data files:
    - The package includes built-in benchmark, so this file is already available
 
 2. **Example Benchmark and Model Predictions (Examples 1, 2, 3, and 5)**: `examples/test.csv` (or `test.xlsx`)
-   - Contains questions, standard answers (including five intentionally empty cells), and model prediction results
+   - Contains questions, five intentionally missing standard answers, and five intentionally missing answers in each model column
    - Requires `ID` column for matching questions
    - One column per model, with model name as column header
    - Bundled models: "DeepSeek-V3.2-Exp" and "Qwen-Plus"
@@ -276,7 +298,7 @@ After running examples, files are generated in the `examples/output/<example_nam
 1. **Individual Model Reports** (`<model_name>/score_report.xlsx`, `.json`, `.csv`)
    - Each model has its own folder containing reports in multiple formats
    - Contains detailed comparison of question content, correct answers, and model answers
-   - Contains statistics tables by category and difficulty
+   - Excel includes statistics tables by category, difficulty, and question type; CSV contains per-question details
    - CSV format is recommended for version control
 
 2. **Model Comparison Summary** (`models_comparison.xlsx`)
@@ -287,7 +309,11 @@ After running examples, files are generated in the `examples/output/<example_nam
    - Complete evaluation data, including statistics by category and difficulty
    - JSON format, convenient for program processing
 
-4. **Other Reports**
+4. **Unscored Issues** (`<model_name>/score_report_issues.csv`, Examples 2 and 5)
+   - Lists only questions that could not be scored and their reasons
+   - Explicit conclusions that disagree with valid standard answers are included in the normal reports as `Incorrect`
+
+5. **Other Reports**
    - Example 5 generates additional reports in Markdown and Word formats
    - Sampling examples generate sampled benchmark files
 
@@ -298,7 +324,7 @@ After running examples, files are generated in the `examples/output/<example_nam
    python examples/example_1_basic_evaluation.py
    ```
 
-2. **Output directory**: All outputs are saved to `examples/output/<example_name>/` automatically
+2. **Output directory**: Reports are saved to `examples/output/<example_name>/` automatically. Example 0 also demonstrates exporting Chinese data files to the current working directory.
 
 3. **File formats**: The examples prioritize CSV format for data files (lighter weight, better for version control)
 

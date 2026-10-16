@@ -89,7 +89,7 @@ def main():
             output_path=excel_output_file  # Auto-save as csv format
         )
         
-        print(f"✓ Loading from Excel and sampling completed, {len(sampled_excel_benchmark.examples)} questions total")
+        print(f"✓ Loading from CSV/Excel and sampling completed, {len(sampled_excel_benchmark.examples)} questions total")
         print(f"✓ Sampling results auto-saved as csv: {excel_output_file}")
         print()
     

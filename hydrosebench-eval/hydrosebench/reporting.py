@@ -150,7 +150,7 @@ def _generate_pdf_report(md_lines: list[str], output_dir: Path) -> None:
         import markdown
     except ImportError:
         print("  ⚠ markdown not installed, skipping PDF report generation")
-        print("    Tip: Run pip install markdown to generate PDF format reports")
+        print("    Tip: PDF reports require markdown, weasyprint, and the required system libraries")
         print("    Or: Use Word document and save as PDF in Microsoft Word")
         return
     
@@ -739,7 +739,7 @@ def generate_analysis_report(
     md_lines.append("- Model comparison summary: `models_comparison.xlsx`")
     md_lines.append("- Detailed reports for each model: `<model_name>/score_report.xlsx` and `<model_name>/score_report.json`")
     md_lines.append("- Word format report: `detailed_analysis_report.docx` (if python-docx is installed)")
-    md_lines.append("- PDF format report: `detailed_analysis_report.pdf` (if weasyprint is installed)")
+    md_lines.append("- PDF format report: `detailed_analysis_report.pdf` (if markdown, weasyprint, and the required system libraries are installed)")
     md_lines.append("")
     
     # Save Markdown report

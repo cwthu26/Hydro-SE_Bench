@@ -67,7 +67,7 @@ benchmark = load_builtin_benchmark("hydrosebench")
 create_summary_excel(summary, Path("./results"), benchmark)
 ```
 
-For the bundled demonstration, run the [example scripts](examples/README.md). They use `examples/test.csv` as both the benchmark and predictions file to demonstrate missing standard answers and unusable model responses. These records are retained as `Unscored`, with separate issue details, and excluded from the incorrect count and accuracy denominator. The official dataset has complete standard answers.
+For the bundled demonstration, run the [example scripts](examples/README.md). They use `examples/test.csv` as both the benchmark and predictions file, with five missing standard answers and five missing model answers per model. These cases are retained as `Unscored`, with separate issue details, and excluded from the incorrect count and accuracy denominator. The seven recorded conclusions meaning "no correct option" or "no correct answer" disagree with valid standard answers and are counted as `Incorrect`. The official dataset has complete standard answers.
 
 ### 3. Sampling Functionality
 
@@ -105,7 +105,10 @@ benchmark = load_benchmark_from_file(
 The sampling functionality automatically selects output format based on input format:
 
 - **JSON input** → JSON output (maintains original JSON format)
+- **CSV input** → CSV output
 - **Excel input** → Excel output
+
+Automatic format selection follows the benchmark's source format before the output filename extension. To convert to a different format, use `save_benchmark(..., format="csv")`, `format="excel"`, or `format="json"` explicitly and choose a matching filename extension.
 
 ```python
 # Load from JSON, output JSON

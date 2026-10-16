@@ -2776,7 +2776,7 @@ HWR-51,basic conceptual knowledge,single choice,"新安江模型在流域坡面�
 A、等流时线法
 B、单位线法
 C、初损后损法
-D、马斯京根法",B,B,B
+D、马斯京根法",B,,B
 HWR-52,basic conceptual knowledge,single choice,"随着水文预报的预见期延长，其预报精度通常会如何变化？（）
 A、降低
 B、增大",A,A,A
@@ -6342,7 +6342,7 @@ GE-221,engineering applications,single choice,"在无黏性土抗渗设计中，
 A.直接采用土的临界坡降
 B.将土的临界坡降除以安全系数
 C.仅参考规范表格中的经验值
-D.依据黏性土的允许坡降试验数据",B,B,B
+D.依据黏性土的允许坡降试验数据",B,B,
 GE-222,engineering applications,single choice,"在修复贴坡排水和堆石坝趾部滤水体时，下列哪项措施的主要作用是避免坝坡土料进入并堵塞滤层结构？
 A.清除原有导渗设施
 B.设置截流沟或低矮挡土墙
@@ -8835,7 +8835,7 @@ A：开式试验装置能够进行空化特性试验
 B：封闭式试验装置中水流在密闭的循环流道内流动
 C：开式装置在上下游均设有与大气连通的自由水面
 D：封闭式装置通常试验水头较低
-E：封闭式装置的结构比开式装置更为复杂",BCE,ABE,ABCE
+E：封闭式装置的结构比开式装置更为复杂",BCE,ABE,
 HSE-188,basic conceptual knowledge,multiple choice,"水轮机型号HLA858a-LJ-1044中，各部分的正确解释是？
 A：HL代表混流式水轮机
 B：LJ表示立轴、金属蜗壳结构
@@ -9639,7 +9639,7 @@ HSE-325,engineering applications,single choice,"在分析水轮机发电系统�
 A.发电机额定转速
 B.主磁场的基波幅值
 C.谐波磁场的幅值
-D.发电机运行时的功率因数",C,C,C
+D.发电机运行时的功率因数",C,C,
 HSE-326,engineering applications,single choice,"按型谱推荐，轴流式水轮机比速公式为\（n_s=\frac{2300}{\sqrt{H}}\），若设计水头\（H=25\,\text{m}\），则其比速\（n_s\）的不正确值为多少？
     A:\（\frac{2300}{5}\）
     B:\（460\,\text{m·kW}\）
@@ -11263,7 +11263,7 @@ ESM-115,basic conceptual knowledge,single choice,"在中国水电站大坝运行
 A.以经济发展为中心
 B.以保护优先，治理为重
 C.安全第一、预防为主、综合治理
-D.开发性移民",C,C,C
+D.开发性移民",C,,C
 ESM-116,basic conceptual knowledge,single choice,"中国《水电站大坝运行安全监督管理规定》主要适用于以下哪类水电站大坝？（）
 A.所有水电站大坝
 B.总装机容量五万千瓦及以上、以发电为主的大中型水电站大坝
@@ -12009,7 +12009,7 @@ ESM-252,engineering applications,single choice,"已知混凝土拌和站月高�
 A.434
 B.868
 C.217
-D.347",A,A,A
+D.347",A,A,
 ESM-253,engineering applications,single choice,"在某碾压混凝土工程的质量控制标准中，以下哪项检测参数符合规范要求？
 A:VC值的允许波动范围为±10秒
 B:压实密度的检测频率为每150㎡一个测点
@@ -12288,7 +12288,7 @@ A:仅关注项目团队内部成员
 B:通过建立伙伴关系提升协作效率
 C:完全消除外部相关方的影响
 D:提前识别并应对利益相关方的期望
-E:持续监测并调整相关方参与策略",BDE,BDE,BDE
+E:持续监测并调整相关方参与策略",BDE,,BDE
 ESM-305,engineering applications,multiple choice,"在水利水电工程的整体变更控制中，应用BIM技术可以有效减少以下哪两种类型的变更数量？
 A:设计缺陷变更
 B:业主需求变更
@@ -14617,7 +14617,7 @@ HRD-229,engineering applications,single choice,"关于圆管中水流流速分�
 A：层流状态下，过流断面上流速呈抛物线型分布
 B：无论是层流还是紊流，过流断面上的流速均呈均匀分布
 C：层流时，断面平均流速为管道中心最大流速的一半
-D：充分发展的紊流中，核心区流速分布近似符合对数律",B,B,B
+D：充分发展的紊流中，核心区流速分布近似符合对数律",B,,B
 HRD-230,engineering applications,single choice,"下列哪项因素的变化会直接引起局部阻力系数ζ的改变？
 A：雷诺数Re
 B：局部障碍的几何形状
@@ -15017,7 +15017,7 @@ A.鱼道设计需结合鱼类的行为习性进行合理布置。
 B.鱼道进出口位置若设置不当，可能导致诱鱼效果不理想。
 C.我国目前已建成的鱼道超过40座，多数运行效果良好。
 D.修建人工产卵场能够有效促进鱼类的繁殖与保护。
-E.为适应低水头闸坝条件，鱼道底坡通常设计得较为平缓。",C,C,C
+E.为适应低水头闸坝条件，鱼道底坡通常设计得较为平缓。",C,C,
 HRD-304,engineering applications,single choice,"在进行河流流量测验时，下列哪种方法通常不被推荐采用？
 A.流速仪法
 B.超声波时差法
@@ -16126,7 +16126,7 @@ HRD-493,reasoning and calculation,multiple choice,"已知某河道断面面积A=
 A：水力半径R=A/χ=390/140=2.786m
 B：谢才系数C=(1/n)×R^(1/6)=(1/0.032)×2.786^(1/6)
 C：水力坡度J=Δz/L=0.2/1000=0.0002
-D：流量Q=A×C×√(R×J)",ABCD,ABCD,ABCD
+D：流量Q=A×C×√(R×J)",ABCD,,ABCD
 HRD-494,reasoning and calculation,multiple choice,"某天然河道，已知断面流量Q=5200m³/s，水位z=98m时过水面积A=1250m²，湿周χ=205m，糙率n=0.028。关于该断面的流量模数K，下列说法正确的是（）？
 A：约26850m³/s
 B：约37800m³/s

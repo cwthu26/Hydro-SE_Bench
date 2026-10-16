@@ -1,6 +1,6 @@
 """
 Example 2: Batch Evaluate Multiple Models
-Demonstrates how to use the HydroBench library to batch evaluate multiple models in an Excel file
+Demonstrates how to use the HydroSEBench library to batch evaluate multiple models in a CSV or Excel file
 """
 
 from utils import setup_package_path, get_output_dir, get_test_data_path
@@ -24,7 +24,7 @@ def main():
     
     if not excel_path.exists():
         print(f"⚠ Example file does not exist: {excel_path}")
-        print("Please ensure test.xlsx file exists, or modify excel_path to point to your data file")
+        print("Please ensure test.csv or test.xlsx exists, or modify excel_path to point to your data file")
         return
     
     print(f"Input file: {excel_path}")
@@ -74,6 +74,8 @@ def main():
     print(f"1. Detailed report for each model: {output_dir}/<model_name>/")
     print("   - score_report.xlsx: Detailed comparison of question content, correct answers, and model answers")
     print("   - score_report.json: Detailed data in JSON format")
+    print("   - score_report.csv: Per-question results in CSV format")
+    print("   - score_report_issues.csv: Separate list of unscored questions and reasons")
     print("   - Contains statistics tables by category and difficulty")
     print(f"2. Model comparison summary (Excel): {output_dir}/models_comparison.xlsx")
     print("   - Score comparison of all models")

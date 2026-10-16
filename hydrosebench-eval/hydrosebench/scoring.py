@@ -16,6 +16,7 @@ except ImportError:
     pd = None  # type: ignore[assignment]
 
 _CHOICE_PATTERN = re.compile(r"[A-Z]+|[A-Z](?:[\s,，;；/、+|]+[A-Z])+")
+_NO_CORRECT_OPTION_ANSWERS = {"无正确选项", "无正确答案"}
 _ISSUE_MESSAGES = {
     "missing_standard_answer": "Missing standard answer",
     "invalid_standard_answer": "Standard answer contains an option absent from the question",
@@ -750,7 +751,8 @@ def score_examples(
             issues.append("missing_model_answer")
         elif not predicted:
             issues.append("unparseable_model_answer")
-        elif option_labels and not set(predicted) <= option_labels:
+        elif (option_labels and not set(predicted) <= option_labels
+              and not (len(predicted) == 1 and predicted[0] in _NO_CORRECT_OPTION_ANSWERS)):
             issues.append("invalid_model_answer")
         expected = tuple(example.correct_options)
         scores.append(ExampleScore(
@@ -841,6 +843,8 @@ def _normalize_answer(raw: Any) -> tuple[str, ...]:
             return tuple()
         text = re.sub(r"^(?:(?:the\s+)?(?:correct\s+)?answer\s*(?:is\s*)?[:：]?\s*|(?:正确)?答案\s*[:：]?\s*)",
                       "", text, flags=re.IGNORECASE).strip().rstrip(".。")
+        if text in _NO_CORRECT_OPTION_ANSWERS:
+            return (text,)
         if not _CHOICE_PATTERN.fullmatch(text.upper()):
             return tuple()
         # A compact answer is a sequence of labels, not a word such as Timeout.
@@ -855,6 +859,8 @@ def _normalize_answer(raw: Any) -> tuple[str, ...]:
             if not parsed:
                 return tuple()
             letters.extend(parsed)
+        if any(answer in _NO_CORRECT_OPTION_ANSWERS for answer in letters) and len(set(letters)) > 1:
+            return tuple()
         return tuple(dict.fromkeys(letters))
 
     if isinstance(raw, Mapping):

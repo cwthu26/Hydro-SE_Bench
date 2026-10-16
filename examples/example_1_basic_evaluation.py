@@ -1,6 +1,6 @@
 """
 Example 1: Basic Evaluation Functionality
-Demonstrates how to use the HydroBench library to evaluate a single model
+Demonstrates how to use the HydroSEBench library to evaluate a single model
 """
 
 from utils import setup_package_path, get_output_dir, get_test_data_path

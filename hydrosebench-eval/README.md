@@ -190,7 +190,7 @@ python -m hydrosebench batch-evaluate \
   --output-dir ./results
 ```
 
-These commands use the complete built-in benchmark. The bundled `examples/test.csv` is a code demonstration with five deliberately missing standard answers and recorded model responses that cannot be scored. To exercise those cases, run the scripts in [examples](../examples/README.md), which load their standard answers from that test file. Demonstration scores are not official benchmark results.
+These commands use the complete built-in benchmark. The repository's `examples/test.csv` is a code demonstration with five deliberately missing standard answers and five missing answers in each of the two model columns. It also preserves seven explicit Qwen-Plus conclusions meaning "no correct option" or "no correct answer"; these disagree with valid standard answers and are scored `Incorrect`. Run the scripts in [examples](../examples/README.md) to use that test file as both the benchmark and predictions. Demonstration scores are not official benchmark results.
 
 ### Using Custom Benchmarks
 
@@ -227,20 +227,27 @@ python -m hydrosebench evaluate \
 
 ### JSON Prediction File Format
 
-Supports the following three formats:
+Supports the following three formats. Each example below is a separate JSON file.
+
+List (matched by question order):
 
 ```json
-// Format 1: List (by question order)
 ["C", "A,B", "B"]
+```
 
-// Format 2: Dictionary (keys are question IDs)
+Dictionary (matched by question ID):
+
+```json
 {
   "BK-1": "C",
   "BK-2": "A,B",
   "BK-3": "B"
 }
+```
 
-// Format 3: List of objects
+List of objects (matched by question ID):
+
+```json
 [
   {"id": "BK-1", "answer": "C"},
   {"id": "BK-2", "answer": ["A", "B"]}
@@ -294,7 +301,8 @@ for score in report.example_scores:
 - Question ID, question content, category, difficulty, question type
 - Correct answer vs model answer comparison
 - Correct/Incorrect/Unscored status, original model response, issue codes and explanations
-- Summary statistics
+
+Excel additionally includes summary statistics and category, difficulty, and question-type worksheets. CSV contains per-question details.
 
 **CSV Format Advantages**:
 - Smaller files, faster loading
@@ -329,6 +337,10 @@ Evaluation continues when an individual question cannot be scored. Normal questi
 | `invalid_model_answer` | The parsed answer refers to an option absent from the question |
 
 `No answer`, `Timeout`, `I do not know`, and `无法作答` are retained as unscored responses. Accepted answer forms include `A`, `a`, `A,B`, uppercase compact choices such as `AB`, lists such as `["A", "B"]`, and wrappers using `answer`, `answers`, `choices`, `prediction`, or `output`. Short explicit forms such as `The answer is A.` and `答案：A` are also accepted. Arbitrary prose and ambiguous alternatives are not guessed.
+
+The explicit conclusions `无正确选项` (no correct option) and `无正确答案` (no correct answer) are treated as model answers. When a valid standard option answer is available, these conclusions disagree with it and are scored `Incorrect`, with zero points. Their original text is retained in the normal reports. They do not generate an unscored issue solely because they contain no option letter. A missing or invalid standard answer still makes the question `Unscored`.
+
+Single-choice and multiple-choice answers receive one point only when the selected option set exactly matches the standard answer. There is no partial credit.
 
 **Accuracy = correct questions / scored questions.** Unscored questions are excluded from both the incorrect count and the accuracy denominator. For example, 6 correct, 2 incorrect and 2 unscored questions produce 75% accuracy on 8 scored questions, with 10 total questions. Always compare coverage alongside accuracy. If no question can be scored, accuracy is `None` in Python, `null` in JSON and `N/A` in text reports.
 

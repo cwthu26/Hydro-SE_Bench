@@ -151,8 +151,6 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ---
 
-**HydroSEBench** - Professional Evaluation Dataset for Water Conservancy and Hydropower Domain
-
 ## Scoring and issue reporting
 
 Scoring continues when a question has a missing/invalid standard answer or a missing/unparseable model response. These questions are retained as `Unscored`, with their IDs, original responses and reasons, and are excluded from both the incorrect count and the accuracy denominator. Accuracy is correct / scored questions; reports also show total and unscored counts. When no question is scorable, accuracy is unavailable (`null` in JSON, `N/A` in text).

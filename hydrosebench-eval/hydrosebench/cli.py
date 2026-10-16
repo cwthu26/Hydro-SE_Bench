@@ -119,6 +119,12 @@ def build_parser() -> argparse.ArgumentParser:
         help="File format to download: json, csv, or all (default: all)",
     )
     download_parser.add_argument(
+        "--language",
+        choices=["zh", "en"],
+        default="zh",
+        help="Dataset language: zh for Chinese (default), en for English",
+    )
+    download_parser.add_argument(
         "--output",
         type=Path,
         help="Output directory or file path. If directory, files will be saved there. If file path, only single format can be specified. Default: current directory",
@@ -214,25 +220,25 @@ def main(argv: list[str] | None = None) -> int:
             output_path = Path(args.output)
 
         # If output path is a file, only support single format
-        if output_path.is_file() or (args.format != "all" and output_path.suffix):
+        if output_path.is_file() or (not output_path.is_dir() and args.format != "all" and output_path.suffix):
             if args.format == "all":
                 raise SystemExit(
                     "Cannot download all formats to a single file. "
                     "Please specify --format json or --format csv, or use a directory path."
                 )
             # Download to specified file path
-            downloaded_path = download_hydrosebench_data(args.format, output_path)
+            downloaded_path = download_hydrosebench_data(args.format, output_path, language=args.language)
             print(f"File downloaded to: {downloaded_path}")
         else:
             # Output path is a directory
             output_path.mkdir(parents=True, exist_ok=True)
             
             if args.format in ("json", "all"):
-                json_path = download_hydrosebench_data("json", output_path / "hydrosebench.json")
+                json_path = download_hydrosebench_data("json", output_path, language=args.language)
                 print(f"JSON file downloaded to: {json_path}")
             
             if args.format in ("csv", "all"):
-                csv_path = download_hydrosebench_data("csv", output_path / "hydrosebench.csv")
+                csv_path = download_hydrosebench_data("csv", output_path, language=args.language)
                 print(f"CSV file downloaded to: {csv_path}")
 
         return 0

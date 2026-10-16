@@ -1,6 +1,6 @@
 """Public package interface for the HydroSEBench evaluation helpers."""
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 from .benchmark import Benchmark, Example
 from .datasets import BUILTIN_BENCHMARKS, download_hydrosebench_data, load_builtin_benchmark

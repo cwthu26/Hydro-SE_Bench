@@ -68,7 +68,14 @@ benchmark = load_builtin_benchmark("hydrosebench_en")
 hydrosebench evaluate --benchmark hydrosebench_en --predictions predictions.json
 ```
 
-The download command continues to export the Chinese edition; use the English file links above for English JSON and CSV.
+The Python package includes both complete editions. Select `zh` (Chinese, default) or `en` (English) when downloading:
+
+```bash
+python -m hydrosebench download --language zh --output ./data
+python -m hydrosebench download --language en --output ./data
+```
+
+Each command exports JSON and CSV. Chinese filenames are `hydrosebench.json` and `hydrosebench.csv`; English filenames are `hydrosebench_en.json` and `hydrosebench_en.csv`, so both editions can share a directory. These commands copy data bundled with the installed package; update your package installation to obtain newer data.
 
 For detailed download and installation instructions, see: 📖 **[Installation Guide](INSTALL.md#download-dataset-files)**
 

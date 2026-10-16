@@ -38,10 +38,11 @@ examples/
 
 ### Example 0: Download HydroSEBench Data Files (`example_0_download_data.py`)
 
-Demonstrates how to download the built-in `hydrosebench.json` and `hydrosebench.csv` files using the HydroSEBench library.
+Demonstrates how to download the complete Chinese and English datasets using the HydroSEBench library. Each edition includes 4,000 questions and standard answers from the installed package.
 
 **Main Features:**
 - Download data files using Python API
+- Select Chinese (`zh`, default) or English (`en`)
 - Download data files in JSON and CSV formats (package uses CSV format for version control)
 - Download to current directory or specified path
 - Download data files using command-line tools
@@ -57,6 +58,11 @@ python example_0_download_data.py
 Files are saved to `examples/output/example_0_download_data/`:
 - `hydrosebench.json`
 - `hydrosebench.csv`
+- `hydrosebench_en.json`
+- `hydrosebench_en.csv`
+- `my_custom_hydrosebench.csv` (custom filename example)
+
+The current-directory examples also save Chinese JSON and CSV in the directory where the script is run.
 
 **Code Examples:**
 
@@ -74,6 +80,10 @@ csv_path = download_hydrosebench_data("csv")
 # Download to specified path
 download_hydrosebench_data("json", Path("./data/hydrosebench.json"))
 download_hydrosebench_data("csv", Path("./data/hydrosebench.csv"))
+
+# Download English files; default filenames include _en
+download_hydrosebench_data("json", language="en")
+download_hydrosebench_data("csv", language="en")
 ```
 
 Download using command-line tools:
@@ -89,6 +99,9 @@ python -m hydrosebench download --format json
 
 # Download to specified directory
 python -m hydrosebench download --output ./my_data
+
+# Download English JSON and CSV to the same directory
+python -m hydrosebench download --language en --output ./my_data
 ```
 
 ### Example 1: Basic Evaluation Functionality (`example_1_basic_evaluation.py`)

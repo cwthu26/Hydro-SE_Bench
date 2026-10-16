@@ -1,6 +1,6 @@
 """
 Example 0: Download HydroSEBench Data Files
-Demonstrates how to use the HydroSEBench library to download built-in hydrosebench.json and hydrosebench.csv files
+Demonstrates how to download the complete Chinese and English datasets in JSON and CSV.
 
 This example demonstrates two methods:
 1. Download using Python API
@@ -67,6 +67,14 @@ def download_with_python_api():
     csv_path = download_hydrosebench_data("csv", custom_path)
     print(f"✓ CSV file downloaded to: {csv_path}")
     print()
+
+    # Example 6: Download English files alongside the Chinese files
+    print("Example 1.6: Select English with language='en' (Chinese is the default)")
+    print("-" * 80)
+    for file_format in ("json", "csv"):
+        path = download_hydrosebench_data(file_format, output_dir, language="en")
+        print(f"✓ English file downloaded to: {path}")
+    print()
     
     return output_dir
 
@@ -100,21 +108,26 @@ def download_with_cli():
     print("5. Download to specified file path:")
     print("   python -m hydrosebench download --format csv --output ./my_data/hydrosebench.csv")
     print()
+
+    print("6. Download English JSON and CSV (use --language zh for Chinese):")
+    print("   python -m hydrosebench download --language en --output ./my_data")
+    print()
     
     print("Note: Command-line method requires installing the hydrosebench package first")
     print("     Installation: pip install -e ../hydrosebench-eval")
     print()
 
 
-def verify_downloaded_files(output_dir: Path):
+def verify_downloaded_files(output_dir: Path, language: str = "zh"):
     """Verify downloaded files"""
     print("=" * 80)
-    print("Verify Downloaded Files")
+    print(f"Verify Downloaded Files ({language})")
     print("=" * 80)
     print()
     
-    json_file = output_dir / "hydrosebench.json"
-    csv_file = output_dir / "hydrosebench.csv"
+    basename = "hydrosebench" if language == "zh" else "hydrosebench_en"
+    json_file = output_dir / f"{basename}.json"
+    csv_file = output_dir / f"{basename}.csv"
     
     if json_file.exists():
         print(f"✓ JSON file exists: {json_file}")
@@ -160,7 +173,7 @@ def main():
     print("Example 0: Download HydroSEBench Data Files")
     print("=" * 80)
     print()
-    print("This example demonstrates how to download built-in hydrosebench.json and hydrosebench.csv files")
+    print("This example downloads Chinese and English JSON and CSV from the installed package")
     print("These files contain complete benchmark dataset data and can be used for local evaluation and analysis")
     print()
     print("Note: CSV format is lighter weight and suitable for version control. If Excel format is needed,")
@@ -175,12 +188,14 @@ def main():
     
     # Verify downloaded files
     verify_downloaded_files(output_dir)
+    verify_downloaded_files(output_dir, language="en")
     
     print("=" * 80)
     print("Example completed!")
     print("=" * 80)
     print()
-    print(f"All files saved to: {output_dir}")
+    print(f"Both editions saved to: {output_dir}")
+    print("The current-directory examples also save Chinese files in the working directory.")
     print()
 
 

@@ -17,6 +17,14 @@ Or install directly (without entering the directory):
 pip install -e hydrosebench-eval
 ```
 
+To upgrade an existing installation from the current repository, run this from the repository root:
+
+```bash
+python -m pip install --upgrade ./hydrosebench-eval
+```
+
+The language selection shown below is available in version `0.1.1`. Updating a repository does not automatically update an installed package or a package-index release.
+
 ### 2. Verify Installation
 
 Run the following command to verify the installation was successful:
@@ -32,7 +40,7 @@ Dataset files are located in the `hydrosebench-eval/hydrosebench/data/` director
 - **Chinese**: [hydrosebench.json](hydrosebench-eval/hydrosebench/data/hydrosebench.json) and [hydrosebench.csv](hydrosebench-eval/hydrosebench/data/hydrosebench.csv)
 - **English**: [hydrosebench_en.json](hydrosebench-eval/hydrosebench/data/hydrosebench_en.json) and [hydrosebench_en.csv](hydrosebench-eval/hydrosebench/data/hydrosebench_en.csv)
 
-Each edition contains 4,000 questions and standard answers. The download API and command below export the Chinese edition; use the links above for the English files.
+Each edition contains 4,000 questions and standard answers. Both editions are bundled with the package. Use `language="zh"` (default) for Chinese or `language="en"` for English. Downloading copies the files from the installed package and does not fetch updates from the internet.
 
 ### Method 1: Download Using Python API
 
@@ -49,6 +57,10 @@ print(f"JSON file downloaded to: {json_path}")
 # Download CSV file to specified directory
 csv_path = download_hydrosebench_data("csv", Path("./data/hydrosebench.csv"))
 print(f"CSV file downloaded to: {csv_path}")
+
+# Download English files (use language="zh" for Chinese)
+download_hydrosebench_data("json", language="en")
+download_hydrosebench_data("csv", Path("./data/hydrosebench_en.csv"), language="en")
 ```
 
 ### Method 2: Download Using Command Line
@@ -66,9 +78,17 @@ python -m hydrosebench download --format csv
 # Download to specified directory
 python -m hydrosebench download --output ./data
 
+# Download English JSON and CSV to the same directory
+python -m hydrosebench download --language en --output ./data
+
+# Download English CSV only
+python -m hydrosebench download --language en --format csv --output ./data
+
 # Download specified format to specified path
 python -m hydrosebench download --format csv --output ./my_data/hydrosebench.csv
 ```
+
+`--language zh` selects Chinese explicitly. With default filenames, Chinese uses `hydrosebench.json` / `hydrosebench.csv`, and English uses `hydrosebench_en.json` / `hydrosebench_en.csv`. Both languages can be saved together without overwriting each other. An explicit output filename is used as supplied.
 
 ### Method 3: Direct File Access
 

@@ -54,20 +54,22 @@ def load_builtin_benchmark(name: str) -> Benchmark:
 
 
 def download_hydrosebench_data(
-    file_format: str = "json", output_path: Path | str | None = None
+    file_format: str = "json", output_path: Path | str | None = None,
+    *, language: str = "zh"
 ) -> Path:
     """
-    Download the built-in hydrosebench data file to the specified location.
+    Copy the selected dataset bundled with the installed package to a local path.
     
     Args:
         file_format: File format, supports "json" or "csv", defaults to "json"
         output_path: Output file path. If None, saves to current working directory
+        language: "zh" for Chinese (default) or "en" for English
     
     Returns:
         Path to the downloaded file
     
     Raises:
-        ValueError: When file_format is not "json" or "csv"
+        ValueError: When file_format or language is unsupported
         FileNotFoundError: When the built-in data file does not exist
     
     Example:
@@ -75,6 +77,9 @@ def download_hydrosebench_data(
         >>> from hydrosebench import download_hydrosebench_data
         >>> path = download_hydrosebench_data("json")
         >>> print(f"File downloaded to: {path}")
+
+        >>> # Download English CSV to current directory as hydrosebench_en.csv
+        >>> path = download_hydrosebench_data("csv", language="en")
         
         >>> # Download CSV file to specified path
         >>> from pathlib import Path
@@ -83,9 +88,12 @@ def download_hydrosebench_data(
     """
     if file_format not in ("json", "csv"):
         raise ValueError(f'file_format must be "json" or "csv", got: {file_format}')
+    if language not in ("zh", "en"):
+        raise ValueError(f'language must be "zh" or "en", got: {language}')
     
     # Determine source file path
-    source_file = _DATA_DIR / f"hydrosebench.{file_format}"
+    dataset_name = "hydrosebench" if language == "zh" else "hydrosebench_en"
+    source_file = _DATA_DIR / f"{dataset_name}.{file_format}"
     
     if not source_file.is_file():
         raise FileNotFoundError(
@@ -95,12 +103,12 @@ def download_hydrosebench_data(
     
     # Determine output path
     if output_path is None:
-        output_path = Path.cwd() / f"hydrosebench.{file_format}"
+        output_path = Path.cwd() / source_file.name
     else:
         output_path = Path(output_path)
         # If output path is a directory, add filename
         if output_path.is_dir():
-            output_path = output_path / f"hydrosebench.{file_format}"
+            output_path = output_path / source_file.name
     
     # Ensure output directory exists
     output_path.parent.mkdir(parents=True, exist_ok=True)

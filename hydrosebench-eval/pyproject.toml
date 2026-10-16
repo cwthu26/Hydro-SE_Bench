@@ -1,0 +1,68 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hydrosebench"
+version = "0.1.0"
+description = "A Python package for evaluating model performance on the HydroSEBench benchmark dataset."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+  { name = "HydroSEBench" }
+]
+keywords = [
+  "benchmark",
+  "evaluation",
+  "nlp",
+  "machine-learning",
+  "hydrosebench",
+  "scoring",
+  "assessment",
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+  "pandas>=2.0",
+  "openpyxl>=3.0",
+]
+
+[project.optional-dependencies]
+word = [
+  "python-docx>=1.0.0",
+]
+pdf = [
+  "markdown>=3.4.0",
+]
+all = [
+  "python-docx>=1.0.0",
+  "markdown>=3.4.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/cwthu26/Hydro-SE-Bench"
+Documentation = "https://github.com/cwthu26/Hydro-SE-Bench#readme"
+Repository = "https://github.com/cwthu26/Hydro-SE-Bench"
+Issues = "https://github.com/cwthu26/Hydro-SE-Bench/issues"
+"Bug Tracker" = "https://github.com/cwthu26/Hydro-SE-Bench/issues"
+
+[project.scripts]
+hydrosebench = "hydrosebench.cli:main"
+
+[tool.setuptools]
+packages = ["hydrosebench"]
+
+[tool.setuptools.package-data]
+hydrosebench = ["data/*.json", "data/*.csv"]
+

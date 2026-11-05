@@ -7,27 +7,17 @@ Hydro-SE Bench evaluates large language models on closed-book questions in hydro
 
 ## 📊 Dataset Overview
 
-The Chinese and English editions contain the same 4,000 question IDs and reference answers. Each question belongs to one of nine domains and one of three competency tasks.
+Both editions share the same **4,000 questions** and reference answers. Of these, **2,702** are single-choice (67.55%) and **1,298** are multiple-choice (32.45%).
+
+Across nine domains, each question assesses one of three tasks.
+
+- **Task A · Basic conceptual knowledge** — 1,650 questions (41.25%)
+- **Task B · Engineering applications** — 1,650 questions (41.25%)
+- **Task C · Reasoning and calculation** — 700 questions (17.50%)
 
 ![Question distribution by domain, task and question type](question%20distribution.png)
 
-Panel **a** shows the distribution across domains. Panels **b** and **c** show the number of answer options per single-choice and multiple-choice question.
-
-### Overall Statistics
-
-| Question type | Questions | Share |
-|---|---:|---:|
-| Single-choice | 2,702 | 67.55% |
-| Multiple-choice | 1,298 | 32.45% |
-| **Total** | **4,000** | **100%** |
-
-### Competency Distribution
-
-| Task | Competency | Questions | Share |
-|---|---|---:|---:|
-| A | Basic conceptual knowledge | 1,650 | 41.25% |
-| B | Engineering applications | 1,650 | 41.25% |
-| C | Reasoning and calculation | 700 | 17.50% |
+*Panel a shows the distribution across domains. Panels b and c show the number of options per single-choice and multiple-choice question.*
 
 ### Category Distribution
 

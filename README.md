@@ -60,9 +60,12 @@ The [archived overall accuracy table](reference_results/Overall_accuracy_bootstr
 
 ```text
 .
+├── .github/workflows/    GitHub Actions configuration for the offline tests
 ├── data/                 Chinese and English benchmark files and authorship annotations
 ├── code/                 Five evaluation and analysis scripts and their usage guide
 ├── reference_results/    Model answer and probability workbooks and two bootstrap tables
+├── tests/                24 offline software tests and their reader guide
+├── .gitignore
 ├── question distribution.png
 ├── requirements.txt
 ├── LICENSE
@@ -70,6 +73,8 @@ The [archived overall accuracy table](reference_results/Overall_accuracy_bootstr
 ```
 
 Use the [model answer workbook](reference_results/hydrobench_final_model_answer_table.xlsx) for final answers and the [probability workbook](reference_results/calibration_model_probabilities.xlsx) for the six-model calibration analysis. Join question records by ID.
+
+The [test guide](tests/README.md) describes each of the 24 offline checks. The [GitHub Actions workflow](.github/workflows/tests.yml) runs them on pushes and pull requests and also supports manual runs.
 
 ## 📄 Data Format
 

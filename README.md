@@ -93,19 +93,15 @@ For example, `BK-1` has the JSON answer key `{"A": 0, "B": 0, "C": 1, "D": 0}` a
 
 ## Ethics and responsible use
 
-**Question sources and expert oversight.** Hydro-SE Bench combines expert-designed questions with LLM-assisted question generation from reference materials, including textbooks, reference books, monographs, Chinese national and industry standards, and laws and regulations. The development team included 35 Hydro-SE domain experts responsible for source selection, question design, answer verification, subfield and task annotation, and quality review. Each candidate question was independently reviewed by at least three experts in addition to its original designer. Review covered technical correctness, the clarity of the answer key, consistency of the explanation with its source, and the assigned subfield and task. Disputed questions were revised and reviewed again; remaining disagreements were discussed to reach consensus, and questions without consensus were excluded.
+Model-generated candidate questions underwent expert review for technical correctness and answer validity before inclusion. This human oversight supports the quality of the benchmark; it does not establish that evaluated models can independently make safe engineering decisions. Applications involving engineering safety require professional assessment and independent verification of model outputs.
 
-**Evaluation and human review.** Scoring uses the final selected options. Although the evaluation prompts request reasoning, an accuracy score does not establish that every step of the generated reasoning is correct. As described in the revised evaluation protocol, responses for which the parser found no valid option letter underwent manual review. An unambiguous final selection was recorded when present. Responses with no model output were labelled `failed`; outputs truncated before a final selection were left blank; complete responses rejecting all offered options were labelled `no correct answer`; and responses requesting more information or stating that the answer could not be determined were labelled `I don't know`. After review, responses without an identifiable valid option letter counted as incorrect. The released answer workbook contains the final selections after this process.
+## Commercial API use
 
-**Scope of use.** The primary results describe performance on Chinese-language, closed-ended Hydro-SE questions, including questions grounded in Chinese standards and engineering practice. The English comparison covers DeepSeek-V4-Flash and GPT-5.4 on the same 4,000 items; it does not extend the full 37-model ranking to English. Benchmark accuracy should not be treated as evidence that a model can independently make safe engineering decisions. Applications involving engineering safety require professional assessment and independent verification.
+**Question generation.** DeepSeek-R1 was accessed through its official API. Requests supplied source passages, question-generation instructions, and expert-designed examples.
 
-## Commercial API use and funding
+**Main evaluation.** Of the 37 models, 22 were accessed through official APIs and 15 through OpenRouter. Requests supplied the evaluation prompt, question and options, without the reference answer. Per-model channels and access dates are recorded in the `model_status` sheet of the [answer workbook](reference_results/hydrobench_final_model_answer_table.xlsx); API model identifiers are listed in [script 01](code/01hydrobench_model_test.py).
 
-**Question generation.** DeepSeek-R1 was accessed through its official API to generate candidate questions. Requests included a source passage, the question-generation instructions, and expert-designed examples. The resulting candidates were subject to the expert review described above. This generation stage is separate from the zero-shot model evaluation.
-
-**Main model evaluation.** All 37 models received Chinese questions and prompts: 22 were accessed through official APIs and 15 through OpenRouter. The `model_status` sheet in the [model answer workbook](reference_results/hydrobench_final_model_answer_table.xlsx) records each model's access channel and access date; the registry in [script 01](code/01hydrobench_model_test.py) records its API model identifier. The revised protocol used a common user-prompt template, no additional system prompt or few-shot examples, temperature 0, a maximum output length of 8,192 tokens, and a 300-second API timeout. Top-p remained at the provider default. Reasoning or thinking mode was enabled where supported, with effort or thinking budget left at the respective API default. Evaluation requests supplied the question and its options without the reference answer. The English comparison used English versions of both the questions and evaluation prompts.
-
-**Confidence elicitation (Fig. 6).** This experiment used Chinese questions and prompts and asked each model for a 0–100% probability that its previously selected answer was completely correct. Requests included the question and that model's prior answer, but withheld the reference answer. The collection routes and API identifiers were:
+**Confidence elicitation (Fig. 6).** Requests supplied the question and the model's previously selected answer, asking for its probability of being completely correct. Reference answers were withheld. This experiment used the following routes, which are reported separately from the main evaluation:
 
 | Model | Access route | API model identifier |
 |---|---|---|
@@ -116,9 +112,11 @@ For example, `BK-1` has the JSON answer key `{"A": 0, "B": 0, "C": 1, "D": 0}` a
 | GPT-5.6-Sol | AIPRO | `gpt-5.6-sol` |
 | GLM-4-32B | Hugging Face router | `zai-org/GLM-4-32B-0414:featherless-ai` |
 
-These routes describe the confidence experiment separately from the main evaluation. The [code guide](code/README.md#04--confidence-calibration) provides the collection and analysis commands and links to the archived probability data.
+The [code guide](code/README.md) describes the generation settings and the collection and analysis commands.
 
-**Cost responsibility.** API usage and routing-service charges incurred in the study, including question generation, model evaluation, and confidence elicitation, were covered by the research group's funds.
+## Funding
+
+API usage and routing-service charges for question generation, model evaluation, and confidence elicitation were covered by the research group's funds.
 
 ## 📝 License
 

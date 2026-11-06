@@ -106,7 +106,7 @@ def load_responses(path: Path | list[Path], model_column: str | None = None) -> 
     responses: dict[str, dict[str, object]] = {}
     for source in ([path] if isinstance(path, Path) else path):
         if not source.exists():
-            continue
+            raise FileNotFoundError(f"Probability response file not found: {source}")
         if source.suffix.lower() == ".xlsx":
             if not model_column:
                 raise ValueError("A model column is required for a probability workbook")

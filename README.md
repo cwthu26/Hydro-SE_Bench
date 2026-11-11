@@ -101,22 +101,11 @@ Model-generated candidate questions underwent expert review for technical correc
 
 **Main evaluation.** Of the 37 models, 22 were accessed through official APIs and 15 through OpenRouter. Requests supplied the evaluation prompt, question and options, without the reference answer. Per-model channels and access dates are recorded in the `model_status` sheet of the [answer workbook](reference_results/hydrobench_final_model_answer_table.xlsx); API model identifiers are listed in [script 01](code/01hydrobench_model_test.py).
 
-**Confidence elicitation (Fig. 6).** Requests supplied the question and the model's previously selected answer, asking for its probability of being completely correct. Reference answers were withheld. This experiment used the following routes, which are reported separately from the main evaluation:
-
-| Model | Access route | API model identifier |
-|---|---|---|
-| DeepSeek-V4-Flash | OpenRouter | `deepseek/deepseek-v4-flash` |
-| Qwen3.6-Plus | OpenRouter | `qwen/qwen3.6-plus` |
-| Kimi K2-0905 | OpenRouter | `moonshotai/kimi-k2-0905` |
-| Llama 3.2 3B Instruct | OpenRouter | `meta-llama/llama-3.2-3b-instruct` |
-| GPT-5.6-Sol | AIPRO | `gpt-5.6-sol` |
-| GLM-4-32B | Hugging Face router | `zai-org/GLM-4-32B-0414:featherless-ai` |
-
 The [code guide](code/README.md) describes the generation settings and the collection and analysis commands.
 
 ## Funding
 
-API usage and routing-service charges for question generation, model evaluation, and confidence elicitation were covered by the research group's funds.
+API usage and routing-service charges for question generation, model evaluation, and confidence elicitation were covered by the research group's fundings.
 
 ## 📝 License
 

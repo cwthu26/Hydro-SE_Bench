@@ -103,10 +103,6 @@ Model-generated candidate questions underwent expert review for technical correc
 
 The [code guide](code/README.md) describes the generation settings and the collection and analysis commands.
 
-## Funding
-
-This study, including the costs of commercial API access and model-routing services, was supported by the National Natural Science Foundation of China (Grant No. 52539001) and Shenzhen Science and Technology Program (Grant No. AI20260020).
-
 ## 📝 License
 
 The complete Hydro-SE Bench, the extracted answers from the 37 evaluated models, and the code for rule-based answer extraction, scoring, and stratified and paired bootstrap analysis are released under the [MIT License](LICENSE). The JSON benchmark files include a canary requesting that benchmark questions be kept out of training corpora.

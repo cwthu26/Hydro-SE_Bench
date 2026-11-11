@@ -97,17 +97,6 @@ python code/04calibration.py collect --input reference_results/hydrobench_final_
 
 The Chinese prompt includes the question and the model's selected answer and withholds the reference answer. Collection defaults to temperature 0, a 2,048-token output limit, 120 seconds per request and up to three attempts. Add `--execute` for live collection. For targeted retesting, pass the first JSONL with `--retest-from` and choose a different output file. This raises the default token limit to 8,192 for the selected retest. Use `--retest-invalid` to include invalid probability replies. To analyze multiple rounds, pass first-pass and retest files to `analyze --responses` in that order.
 
-**API access for the Fig. 6 confidence experiment.** The six models were asked to estimate the probability that their earlier answers were correct. Those requests went through OpenRouter for four models, AIPRO for GPT-5.6-Sol and the Hugging Face router for GLM-4-32B. The table lists the model identifier used on each route.
-
-| Workbook model | Route | API model identifier |
-|---|---|---|
-| DeepSeek-V4-Flash | OpenRouter | `deepseek/deepseek-v4-flash` |
-| Qwen3.6-Plus | OpenRouter | `qwen/qwen3.6-plus` |
-| Kimi K2-0905 | OpenRouter | `moonshotai/kimi-k2-0905` |
-| Llama 3.2 3B Instruct | OpenRouter | `meta-llama/llama-3.2-3b-instruct` |
-| GPT-5.6-Sol | AIPRO | `gpt-5.6-sol` |
-| GLM-4-32B | Hugging Face router | `zai-org/GLM-4-32B-0414:featherless-ai` |
-
 ## 05 · Subsampling stability
 
 **Paper correspondence.** Section 4.1 and Fig. 7 examine how accuracy varies with the proportion of questions sampled. [05subsampling.py](05subsampling.py) computes the means and standard deviations for the two models in Fig. 7 and the separate tolerance summaries across all 37 models.

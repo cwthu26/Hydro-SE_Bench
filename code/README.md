@@ -10,7 +10,7 @@ python -m pip install -r requirements.txt
 
 ## 01 · Model evaluation and answer extraction
 
-**Paper correspondence.** Section 2.3 and Table 4 describe the evaluation prompt and the rules for extracting answer options. [01hydrobench_model_test.py](01hydrobench_model_test.py) implements that protocol.
+**Paper correspondence.** Section 2.3 and Table 5 describe the evaluation prompt and the rules for extracting answer options. [01hydrobench_model_test.py](01hydrobench_model_test.py) implements that protocol.
 
 **Input and output.** Use the [Chinese](../data/hydrosebench.json) or [English](../data/hydrosebench_en.json) benchmark JSON. A live run writes a JSONL file with one record per attempted question and a manifest of the run settings. The archived final answers are in the [answer workbook](../reference_results/hydrobench_final_model_answer_table.xlsx), in `results` for Chinese and `English_version_results` for English.
 
@@ -53,7 +53,7 @@ To estimate that interval, the script repeatedly samples questions with replacem
 
 ## 03 · Paired model comparisons
 
-**Paper correspondence.** Section 2.4 describes the paired bootstrap. Section 3.2 and Fig. 3c report comparisons among the eight leading models. [03paired_bootstrap_comparisons.py](03paired_bootstrap_comparisons.py) generates the pairwise statistics reported in Supplementary Table 3.
+**Paper correspondence.** Section 2.4 describes the paired bootstrap. Section 3.2 and Fig. 3c report comparisons among the eight leading models. [03paired_bootstrap_comparisons.py](03paired_bootstrap_comparisons.py) generates the pairwise statistics reported in Supplementary Table 4.
 
 **Input and output.** The script reads the same `results` worksheet as script 02. Its output has one row per model pair. The interval here describes a *difference between two models*, whereas script 02 reports an interval for each model’s accuracy.
 
